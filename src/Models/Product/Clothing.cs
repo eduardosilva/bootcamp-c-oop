@@ -10,7 +10,7 @@ namespace Exemplo.Models.Products
         // Diretamente da especificação do Google Merchant para produtos
         public IEnumerable<Color> Colors { get; set; }
         public IEnumerable<Material> Materials { get; set; }
-        public IEnumerable<string> Pattern { get; set; }
+        public IEnumerable<string> Patterns { get; set; }
         public AgeGroup AgeGroup { get; set; }
         public string Size { get; set; }
 

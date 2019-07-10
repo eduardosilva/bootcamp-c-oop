@@ -6,7 +6,10 @@ namespace Exemplo.Models.Products.Enums {
         Wool = 4,
         Elastane = 5,
         Wood = 6,
-        Plastic = 7,
-        Steel = 8
+        ParticleBoard = 7, // MDP
+        FibreBoard = 8, // MDF
+        Steel = 9,
+        Glass = 10,
+        Rubber = 11
     }
 }

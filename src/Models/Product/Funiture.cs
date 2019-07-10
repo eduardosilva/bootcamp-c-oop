@@ -4,7 +4,7 @@ using System.Linq;
 using Exemplo.Models.Products;
 using Exemplo.Models.Products.Enums;
 
-namespace Exemplo.Model.Product
+namespace Exemplo.Models.Products
 {
     public class Furniture: Product<string>
     {
