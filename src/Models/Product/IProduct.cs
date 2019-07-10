@@ -4,5 +4,6 @@ namespace Exemplo.Models.Products
     {
         int Id { get; }
         decimal GetUnitPrice();
+        string GetDescription();
     }
 }

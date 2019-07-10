@@ -15,8 +15,14 @@ namespace Exemplo.Services {
         {
             return await Task.Run(() => {
                 log($"Beggining new transaction for user {user}");
+                log("Items in cart:");
+                foreach (var item in cart.Items)
+                {
+                    var value = item.Value;
+                    log($"\t({value.Amount}) {value.Product.GetDescription()}");
+                }
                 return true;
-            });            
+            });
         }
     }
 }

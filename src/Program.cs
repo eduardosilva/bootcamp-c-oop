@@ -49,8 +49,8 @@ namespace Exemplo
             var item1 = new Item(CamisaVermelha, 3);
             var item2 = new Item(MesaJantar, 1);
 
-            carrinho.Products.Add(item1.Product.Id, item1);
-            carrinho.Products.Add(item2.Product.Id, item2);
+            carrinho.Items.Add(item1.Product.Id, item1);
+            carrinho.Items.Add(item2.Product.Id, item2);
 
             var ok = CreditPaymentService.ExecuteTransaction("edu", carrinho).Result;
 

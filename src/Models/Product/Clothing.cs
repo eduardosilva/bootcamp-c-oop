@@ -17,7 +17,7 @@ namespace Exemplo.Models.Products
         public override string GetDescription() {
             string colors = String.Join(" ", Colors.Select(c => c.GetDescription()));
 
-            return $"{Name} {colors} {Brand} - {Details}";
+            return $"{Name} ({colors}) {Brand} - {Details}";
         }
     }
 }

@@ -4,14 +4,14 @@ using Exemplo.Models.Products;
 
 namespace Exemplo.Models {
     public class Cart {
-        public IDictionary<int, Item> Products { get; }
+        public IDictionary<int, Item> Items { get; }
 
         public Cart() {
-            this.Products = new Dictionary<int, Item>();
+            this.Items = new Dictionary<int, Item>();
         }
 
         public decimal GetTotal() {
-            return Products.Sum(p => p.Value.SubTotal);
+            return Items.Sum(p => p.Value.SubTotal);
         }
     }
 

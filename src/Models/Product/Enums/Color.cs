@@ -2,52 +2,52 @@ using System.ComponentModel;
 
 namespace Exemplo.Models.Products.Enums {
     public enum Color {
-        [Description("Black")]
+        [Description("Preto")]
         Black = 0,
 
-        [Description("White")]
+        [Description("Branco")]
         White = 1,
 
-        [Description("Red")]
+        [Description("Vermelho")]
         Red = 2,
 
-        [Description("Lime")]
+        [Description("Limão")]
         Lime = 3,
 
-        [Description("Blue")]
+        [Description("Azul")]
         Blue = 4,
 
-        [Description("Yellow")]
+        [Description("Amarelo")]
         Yellow = 5,
 
-        [Description("Aqua")]
+        [Description("Ciano")]
         Cyan = 6,
 
-        [Description("Fuscia")]
+        [Description("Fúcsia")]
         Magenta = 7,
 
-        [Description("Silver")]
+        [Description("Prata")]
         Silver = 8,
 
-        [Description("Gray")]
+        [Description("Cinza")]
         Gray = 9,
 
-        [Description("Maroon")]
+        [Description("Castanho")]
         Maroon = 10,
 
-        [Description("Olive")]
+        [Description("Oliva")]
         Olive = 11,
 
-        [Description("Green")]
+        [Description("Verde")]
         Green = 12,
 
-        [Description("Purple")]
+        [Description("Roxo")]
         Purple = 13,
 
-        [Description("Teal")]
+        [Description("Verde-petróleo")]
         Teal = 14,
 
-        [Description("Navy")]
+        [Description("Azul-marinho")]
         Navy = 15
     }
 }
