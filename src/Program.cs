@@ -21,8 +21,8 @@ namespace Exemplo
             Materials = new Material[] {Material.Cotton, Material.Polyester},
             UnitPrice = 219.99M,
             Volume = new VolumeCM {
-                Height = 54,
-                Width = 160,
+                Height = 70,
+                Width = 54,
                 Depth = 0.1
             },
             WeightKG = 0.15
