@@ -22,7 +22,7 @@ namespace Exemplo.Models {
 
             if (!items.TryGetValue(product.Id, out item)) {
                 if (product.Stock == 0 ) {
-                    throw new Exception("Product not available");
+                    throw new InvalidOperationException("Product not available");
                 }
                 
                 item = new CartItem(product, 0);

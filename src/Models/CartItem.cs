@@ -4,7 +4,7 @@ using Exemplo.Models.Products;
 
 namespace Exemplo.Models {
     public class CartItem {
-        private int amount;
+        protected int amount;
         public IProduct Product { get; }
         public int Amount {
             get {
