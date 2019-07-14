@@ -18,7 +18,13 @@ namespace Exemplo
             AgeGroup = AgeGroup.Adult,
             Colors = new Color[] {Color.Red},
             Materials = new Material[] {Material.Cotton, Material.Polyester},
-            UnitPrice = 219.99M
+            UnitPrice = 219.99M,
+            Volume = new VolumeCM {
+                Height = 54,
+                Width = 160,
+                Depth = 0.1
+            },
+            WeightKG = 0.15
         };
 
         static Furniture MesaJantar = new Furniture {
@@ -30,12 +36,12 @@ namespace Exemplo
             Colors = new Color[] {Color.White},
             Materials = new Material[] {Material.FibreBoard},
             UnitPrice = 759.99M,
-            Size = new Size {
+            Volume = new VolumeCM {
                 Height = 76.5,
                 Width = 160,
                 Depth = 80
             },
-            Weight = 32
+            WeightKG = 32
         };
 
         static CreditPaymentService CreditPaymentService;
@@ -46,11 +52,8 @@ namespace Exemplo
 
             var carrinho = new Cart();
             
-            var item1 = new Item(CamisaVermelha, 3);
-            var item2 = new Item(MesaJantar, 1);
-
-            carrinho.Items.Add(item1.Product.Id, item1);
-            carrinho.Items.Add(item2.Product.Id, item2);
+            carrinho.AddItem(CamisaVermelha, 3);
+            carrinho.AddItem(MesaJantar);
 
             var ok = CreditPaymentService.ExecuteTransaction("edu", carrinho).Result;
 

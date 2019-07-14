@@ -4,43 +4,61 @@ using Exemplo.Models.Products;
 
 namespace Exemplo.Models {
     public class Cart {
-        public IDictionary<int, Item> Items { get; }
+        protected IDictionary<int, CartItem> items;
+
+        public IEnumerable<CartItem> Items {
+            get {
+                return this.items.Values;
+            }
+        }
 
         public Cart() {
-            this.Items = new Dictionary<int, Item>();
+            this.items = new Dictionary<int, CartItem>();
+        }
+
+        public int AddItem(IProduct product, int amount = 1) {
+            CartItem item = null;
+
+            if (!items.TryGetValue(product.Id, out item)) {
+                item = new CartItem(product, 0);
+            }
+
+            return item.Amount += amount;
+        }
+
+        public int RemoveItem(IProduct product, int amount = 1) {
+            return RemoveItem(product.Id, amount);
+        }
+
+        public int RemoveItem(int id, int amount = 1) {
+            var item = this.items[id];
+
+            item.Amount -= amount;
+
+            if (item.Amount == 0 ) {
+                this.items.Remove(id);
+            }
+
+            return item.Amount;
+        }
+
+        public void SetAmount(IProduct product, int amount) {
+            SetAmount(product.Id, amount);
+        }
+
+        public void SetAmount(int id, int amount) {
+            var item = this.items[id];
+
+            item.Amount = amount;
+
+            if (item.Amount == 0 ) {
+                this.items.Remove(id);
+            }
         }
 
         public decimal GetTotal() {
-            return Items.Sum(p => p.Value.SubTotal);
+            return this.items.Sum(p => p.Value.SubTotal);
         }
     }
 
-    public class Item {
-        private int amount;
-
-        public IProduct Product { get; }
-        public int Amount {
-            get {
-                return amount;
-            }
-            set {
-               if (value < 0) {
-                   amount = 0;
-               } else {
-                   amount = value;
-               }
-            }
-        }
-
-        public decimal SubTotal {
-            get {
-                return amount * Product.GetUnitPrice();
-            }
-        }
-
-        public Item(IProduct product, int amount = 1) {
-            this.Product = product;
-            this.Amount = amount;
-        }
-    }
 }

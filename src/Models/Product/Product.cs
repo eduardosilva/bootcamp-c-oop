@@ -7,21 +7,21 @@ namespace Exemplo.Models.Products
     {
         public int Id { get; set; }
         public T SKU { get; set; }
+        public decimal UnitPrice { get; set; }
+        public int Stock { get; set; }
         public string Name { get; set; }
         public string Brand { get; set; }
         public string Details { get; set; }
-        public decimal UnitPrice { get; set; }
-
-        public virtual string GetDescription() {
-            return $"{Name} {Brand} - {Details}";
-        }
-
-        public virtual decimal GetUnitPrice() {
-            return UnitPrice;
+        public VolumeCM Volume { get; set; }
+        public double WeightKG { get; set; }
+        public virtual string Description {
+            get {
+                return $"{Name} {Brand} - {Details}";
+            }
         }
     }
 
-    public struct Size {
+    public struct VolumeCM {
         public double Height;
         public double Width;
         public double Depth;

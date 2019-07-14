@@ -18,8 +18,8 @@ namespace Exemplo.Services {
                 log("Items in cart:");
                 foreach (var item in cart.Items)
                 {
-                    var value = item.Value;
-                    log($"\t({value.Amount}) {value.Product.GetDescription()}");
+                    var value = item;
+                    log($"\t({value.Amount}) {value.Product.Description}");
                 }
                 return true;
             });

@@ -14,10 +14,11 @@ namespace Exemplo.Models.Products
         public AgeGroup AgeGroup { get; set; }
         public string Size { get; set; }
 
-        public override string GetDescription() {
-            string colors = String.Join(" ", Colors.Select(c => c.GetDescription()));
-
-            return $"{Name} ({colors}) {Brand} - {Details}";
+        public override string Description {
+            get {
+                string colors = String.Join(" ", Colors.Select(c => c.GetDescription()));
+                return $"{Name} ({colors}) {Brand} - {Details}";
+            }
         }
     }
 }
