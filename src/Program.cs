@@ -11,6 +11,7 @@ namespace Exemplo
         static Clothing CamisaVermelha = new Clothing {
             Id = 332,
             SKU = "00SNKES-7723",
+            Stock = 42,
             Name = "Camisa Polo Vermelha",
             Brand = "Lacoste",
             Details = "Camisa polo vermelha lisa Lacoste",
@@ -30,6 +31,7 @@ namespace Exemplo
         static Furniture MesaJantar = new Furniture {
             Id = 1198,
             SKU = "pdnMRgdlhG9RJq53MS9T",
+            Stock = 9,
             Name = "Mesa 160x80",
             Brand = "Tok&Stok",
             Details = "Mesa de MDF de eucalipto com tampo branco",
@@ -48,17 +50,15 @@ namespace Exemplo
         
         static void Main(string[] args)
         {
-            CreditPaymentService = new CreditPaymentService(Console.WriteLine);
-
-            var carrinho = new Cart();
+            var compra = new Purchase("edu");
             
-            carrinho.AddItem(CamisaVermelha, 3);
-            carrinho.AddItem(MesaJantar);
+            compra.Cart.AddItem(CamisaVermelha, 3);
+            compra.Cart.AddItem(MesaJantar);
 
-            var ok = CreditPaymentService.ExecuteTransaction("edu", carrinho).Result;
+            var status = compra.CompletePurchase(PaymentMethod.Credit).Result;
 
-            Console.WriteLine(ok);
-            Console.WriteLine(carrinho.GetTotal());
+            Console.WriteLine(status);
+            Console.WriteLine(compra.Cart.GetTotalValue());
         }
     }
 }

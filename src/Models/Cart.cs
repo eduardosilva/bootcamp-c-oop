@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Exemplo.Models.Products;
@@ -20,7 +21,12 @@ namespace Exemplo.Models {
             CartItem item = null;
 
             if (!items.TryGetValue(product.Id, out item)) {
+                if (product.Stock == 0 ) {
+                    throw new Exception("Product not available");
+                }
+                
                 item = new CartItem(product, 0);
+                this.items.Add(product.Id, item);
             }
 
             return item.Amount += amount;
@@ -56,8 +62,12 @@ namespace Exemplo.Models {
             }
         }
 
-        public decimal GetTotal() {
+        public decimal GetTotalValue() {
             return this.items.Sum(p => p.Value.SubTotal);
+        }
+
+        public decimal GetTotalAmount() {
+            return this.items.Sum(p => p.Value.Amount);
         }
     }
 
