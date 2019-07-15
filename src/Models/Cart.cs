@@ -17,6 +17,12 @@ namespace Exemplo.Models {
             this.items = new Dictionary<int, CartItem>();
         }
 
+        public Cart(IEnumerable<IProduct> items) : this() {
+            foreach(var item in items){
+                AddItem(item);
+            }
+        }
+
         public int AddItem(IProduct product, int amount = 1) {
             CartItem item = null;
 
