@@ -1,18 +1,19 @@
+﻿using Exemplo.Models.Products.Enums;
 using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace Exemplo.Models.Products
+namespace Exemplo._3
 {
-    public abstract class Product<T> : IProduct
-        where T : IComparable
+    public class Product
     {
         public int Id { get; set; }
-        public T SKU { get; set; }
+        public string SKU { get; set; }
         public decimal UnitPrice { get; set; }
         public int Stock { get; set; }
         public string Name { get; set; }
         public string Brand { get; set; }
         public string Details { get; set; }
-        public VolumeCM Volume { get; set; }
         public double WeightKG { get; set; }
         public virtual string Description
         {
@@ -23,10 +24,12 @@ namespace Exemplo.Models.Products
         }
     }
 
-    public struct VolumeCM
+    public class Clothing : Product
     {
-        public double Height;
-        public double Width;
-        public double Depth;
+        public IEnumerable<Color> Colors { get; set; }
+        public IEnumerable<Material> Materials { get; set; }
+        public IEnumerable<string> Patterns { get; set; }
+        public AgeGroup AgeGroup { get; set; }
+        public string Size { get; set; }
     }
 }

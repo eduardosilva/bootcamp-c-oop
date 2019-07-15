@@ -1,7 +1,9 @@
 using System.ComponentModel;
 
-namespace Exemplo.Models.Products.Enums {
-    public enum Color {
+namespace Exemplo.Models.Products.Enums
+{
+    public enum Color
+    {
         [Description("Preto")]
         Black = 0,
 

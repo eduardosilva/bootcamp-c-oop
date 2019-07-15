@@ -1,5 +1,7 @@
-namespace Exemplo.Models.Products.Enums {
-    public enum FurnitureType {
+namespace Exemplo.Models.Products.Enums
+{
+    public enum FurnitureType
+    {
         Chair = 1,
         Table = 2,
         Sofa = 3,

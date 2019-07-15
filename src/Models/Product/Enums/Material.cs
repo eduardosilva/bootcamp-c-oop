@@ -1,5 +1,7 @@
-namespace Exemplo.Models.Products.Enums {
-    public enum Material {
+namespace Exemplo.Models.Products.Enums
+{
+    public enum Material
+    {
         Leather = 1,
         Cotton = 2,
         Polyester = 3,

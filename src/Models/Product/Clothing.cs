@@ -5,7 +5,7 @@ using Exemplo.Models.Products.Enums;
 
 namespace Exemplo.Models.Products
 {
-    public class Clothing: Product<string>
+    public class Clothing : Product<string>
     {
         // Diretamente da especificação do Google Merchant para produtos
         public IEnumerable<Color> Colors { get; set; }
@@ -14,8 +14,10 @@ namespace Exemplo.Models.Products
         public AgeGroup AgeGroup { get; set; }
         public string Size { get; set; }
 
-        public override string Description {
-            get {
+        public override string Description
+        {
+            get
+            {
                 string colors = String.Join(" ", Colors.Select(c => c.GetDescription()));
                 return $"{Name} ({colors}) {Brand} - {Details}";
             }
