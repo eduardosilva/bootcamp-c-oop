@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Exemplo.Models.Cinema
 {
-    public class Threather {
+    public class Theather {
         public TimeSpan OpeningTime { get; set; }
         public TimeSpan ClosingTime { get; set; }
         public ICollection<Room> Rooms { get; set; }
