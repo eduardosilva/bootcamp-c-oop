@@ -4,7 +4,7 @@ namespace Exemplo.Models.Cinema
 {
     public class Seat
     {        
-        public short Number { get; set; }
+        public int Number { get; set; }
         public SeatType Type { get; set; }
     }
 }
