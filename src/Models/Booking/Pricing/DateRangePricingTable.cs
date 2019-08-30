@@ -60,7 +60,7 @@ namespace Exemplo.Models.Booking.Pricing
                 }
             )
                 .Where(r => date >= r.StartDate && date <= r.EndDate)
-                .OrderBy(r => r.StartDate.CompareTo(r.EndDate))
+                .OrderBy(r => r.EndDate.Ticks - r.StartDate.Ticks)
                 .FirstOrDefault();
 
             if (rule == null)
