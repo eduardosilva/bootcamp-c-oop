@@ -4,10 +4,10 @@ namespace Exemplo.Models.Booking.Pricing
 {
     internal class PriceRangeWeekday : PriceRange
     {
-        public int Weekday { get; }
+        public DayOfWeek Weekday { get; }
 
         public PriceRangeWeekday(
-            int weekday,
+            DayOfWeek weekday,
             TimeSpan startTime,
             TimeSpan endTime,
             decimal value

@@ -4,19 +4,19 @@ using System.Linq;
 
 namespace Exemplo.Models.Booking.Pricing
 {
-    public class DateRangePricingTable : IPricingTable
+    public class DateRangePricingTable : IPricingTable<PriceRange>
     {
         protected readonly TimeSpan dayStart = new TimeSpan(0, 0, 0);
         protected readonly TimeSpan dayEnd = new TimeSpan(TimeSpan.TicksPerDay);
 
         protected ICollection<PriceRange> priceRules = new List<PriceRange>();
 
-        public void AddPricingRule(int weekday, decimal price)
+        public void AddPricingRule(DayOfWeek weekday, decimal price)
         {
             this.AddPricingRule(weekday, dayStart, dayEnd, price);
         }
 
-        public void AddPricingRule(int weekday, TimeSpan startTime, TimeSpan endTime, decimal price)
+        public void AddPricingRule(DayOfWeek weekday, TimeSpan startTime, TimeSpan endTime, decimal price)
         {
             var range = new PriceRangeWeekday(weekday, startTime, endTime, price);
             priceRules.Add(range);
@@ -31,6 +31,16 @@ namespace Exemplo.Models.Booking.Pricing
         {
             var range = new PriceRangeDate(date, startTime, endTime, price);
             priceRules.Add(range);
+        }
+
+        public IEnumerable<PriceRange> GetPricingRules()
+        {
+            return this.priceRules.AsEnumerable();
+        }
+
+        public void RemoveRule(PriceRange rule)
+        {
+            this.priceRules.Remove(rule);
         }
 
         public decimal GetPrice(DateTime date)
@@ -49,7 +59,7 @@ namespace Exemplo.Models.Booking.Pricing
                     r => r.GetType() == typeof(PriceRangeWeekday)
                 )
                     .Cast<PriceRangeWeekday>()
-                    .Where(r => r.Weekday == (int)date.DayOfWeek);
+                    .Where(r => r.Weekday == date.DayOfWeek);
             }
 
             var rule = foundPriceRules.Select(
