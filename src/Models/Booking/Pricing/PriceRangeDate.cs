@@ -2,7 +2,7 @@ using System;
 
 namespace Exemplo.Models.Booking.Pricing
 {
-    internal class PriceRangeDate : PriceRange
+    public class PriceRangeDate : PriceRange
     {
         public DateTime Date { get; }
 
@@ -14,11 +14,6 @@ namespace Exemplo.Models.Booking.Pricing
         ) : base(startTime, endTime, value)
         {
             this.Date = date;
-        }
-
-        public override decimal GetPrice()
-        {
-            return this.Value;
         }
     }
 }

@@ -14,7 +14,5 @@ namespace Exemplo.Models.Booking.Pricing
             this.EndTime = endTime;
             this.Value = value;
         }
-
-        public abstract decimal GetPrice();
     }
 }

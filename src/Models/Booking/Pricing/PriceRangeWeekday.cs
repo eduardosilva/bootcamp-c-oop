@@ -2,7 +2,7 @@ using System;
 
 namespace Exemplo.Models.Booking.Pricing
 {
-    internal class PriceRangeWeekday : PriceRange
+    public class PriceRangeWeekday : PriceRange
     {
         public DayOfWeek Weekday { get; }
 
@@ -14,11 +14,6 @@ namespace Exemplo.Models.Booking.Pricing
         ) : base(startTime, endTime, value)
         {            
             this.Weekday = weekday;
-        }
-
-        public override decimal GetPrice()
-        {
-            return this.Value;
         }
     }
 }
