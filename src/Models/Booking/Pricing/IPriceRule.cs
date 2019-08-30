@@ -1,6 +1,6 @@
 namespace Exemplo.Models.Booking.Pricing
 {
-    public interface IPriceRange
+    public interface IPriceRule
     {
         decimal GetPrice();
     }

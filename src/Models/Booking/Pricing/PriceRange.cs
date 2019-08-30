@@ -2,24 +2,19 @@ using System;
 
 namespace Exemplo.Models.Booking.Pricing
 {
-    public class PriceRange : IPriceRange
+    public abstract class PriceRange: IPriceRule, ITimeRange
     {
-        public int Weekday { get => weekday; }
+        public virtual TimeSpan StartTime { get; protected set; }
+        public virtual TimeSpan EndTime { get; protected set; }
+        public virtual decimal Value { get; protected set; }
 
-
-        public PriceRangeWeekday(
-            int weekday,
-            TimeSpan startTime,
-            TimeSpan endTime
-        )
+        public PriceRange(TimeSpan startTime, TimeSpan endTime, decimal value)
         {
-            this.weekday = weekday;
-            this.price = price;
+            this.StartTime = startTime;
+            this.EndTime = endTime;
+            this.Value = value;
         }
 
-        public decimal GetPrice()
-        {
-            return price;
-        }
+        public abstract decimal GetPrice();
     }
 }
