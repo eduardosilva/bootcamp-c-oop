@@ -1,10 +1,10 @@
 using Exemplo.Enums;
 
-namespace Exemplo.Models
+namespace Exemplo.Models.Cinema
 {
     public class Seat
     {        
-        public int Number { get; set; }
+        public short Number { get; set; }
         public SeatType Type { get; set; }
     }
 }

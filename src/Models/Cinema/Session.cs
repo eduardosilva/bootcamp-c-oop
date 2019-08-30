@@ -1,6 +1,6 @@
 using System;
 
-namespace Exemplo.Models
+namespace Exemplo.Models.Cinema
 {
     public class Session
     {

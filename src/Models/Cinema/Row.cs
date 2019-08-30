@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Exemplo.Enums;
 
-namespace Exemplo.Models
+namespace Exemplo.Models.Cinema
 {
     public class Row
     {        
