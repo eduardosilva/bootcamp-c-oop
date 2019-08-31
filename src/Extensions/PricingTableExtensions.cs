@@ -5,16 +5,18 @@ namespace Exemplo.Extensions
 {
     public static class PricingTableExtensions
     {
-        public static decimal? TryGetPrice<T>(this IPricingTable<T> table, DateTime date)
+        public static bool TryGetPrice<T>(this IPricingTable<T> table, DateTime date, out decimal price)
             where T : IPriceRule
         {
             try
             {
-                return table.GetPrice(date);
+                price = table.GetPrice(date);
+                return true;
             }
             catch (System.Exception)
             {
-                return null;
+                price = 0;
+                return false;
             }
         }
     }

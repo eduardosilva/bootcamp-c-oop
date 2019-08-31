@@ -52,7 +52,7 @@ namespace Exemplo.Models.Booking.Pricing
 
             if (rule == null)
             {
-                throw new Exception("No price rule found for specified date.");
+                throw new ApplicationException("No price rule found for specified date.");
             }
 
             return rule.Value;
