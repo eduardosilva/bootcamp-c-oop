@@ -12,7 +12,8 @@ namespace Exemplo.Models.Cinema
         public IEnumerable<Row> Rows { get; internal set; }
         public bool Supports3D { get; set; }
 
-        public int Capacity => this.Rows.SelectMany(r => r.Seats).Count();
+        public IEnumerable<Seat> AllSeats => this.Rows.SelectMany(r => r.Seats);
+        public int Capacity => this.AllSeats.Count();
 
         public Seat this[string seat]
         {
@@ -39,8 +40,6 @@ namespace Exemplo.Models.Cinema
                     .Single(s => s.Number == number);
             }
         }
-
-        internal Room() {}
     }
     
 }

@@ -7,16 +7,20 @@ using Exemplo.Models.Common;
 
 namespace Exemplo
 {
-    public class Sample
+    public partial class Application
     {
-        private ICollection<Theather> theathers = new List<Theather>();
-
-        private Sample() { }
-
-        public static Sample CreateSample()
+        public static Application Startup()
         {
-            var instance = new Sample();
+            var instance = new Application();
 
+            SetupTheathers(instance);
+            SetupFilms(instance);
+
+            return instance;
+        }
+
+        private static void SetupTheathers(Application instance)
+        {
             instance.AddTheather(t => {
                 t.Name = "Cinema Pátio Paulista";
                 t.OpeningTime = new TimeSpan(11, 0, 0);
@@ -99,23 +103,59 @@ namespace Exemplo
                         row.HasSeatRange(1, 22);
                     });
                 });
-
             });
-
-            return instance;
         }
 
-        public void Run()
+        private static void SetupFilms(Application instance)
         {
-            Console.WriteLine(this.theathers.First().Rooms.First().Capacity);
+            instance.AddFilm(new Film {
+                Title = "Lion King",
+                ReleaseDate = new DateTime(2019, 7, 18),
+                Genres = new Genre[] { Genre.Animation, Genre.Adventure, Genre.Drama },
+                RunningTime = new TimeSpan(1, 58, 0),
+                MinimumAge = 10,
+                Available3D = true
+            });
+            instance.AddFilm(new Film {
+                Title = "Avengers: Age of Utron",
+                ReleaseDate = new DateTime(2015, 4, 23),
+                Genres = new Genre[] { Genre.Action, Genre.Adventure, Genre.SciFi },
+                RunningTime = new TimeSpan(2, 21, 0),
+                MinimumAge = 12,
+                Available3D = true
+            });
+            instance.AddFilm(new Film {
+                Title = "Inglorious Basterds",
+                ReleaseDate = new DateTime(2009, 10, 9),
+                Genres = new Genre[] { Genre.Adventure, Genre.Drama, Genre.War },
+                RunningTime = new TimeSpan(2, 33, 0),
+                MinimumAge = 18,
+                Available3D = false
+            });
+            instance.AddFilm(new Film {
+                Title = "The Matrix",
+                ReleaseDate = new DateTime(1999, 5, 21),
+                Genres = new Genre[] { Genre.Action, Genre.SciFi },
+                RunningTime = new TimeSpan(2, 16, 0),
+                MinimumAge = 12,
+                Available3D = false
+            });
+            instance.AddFilm(new Film {
+                Title = "The Godfather",
+                ReleaseDate = new DateTime(1972, 9, 10),
+                Genres = new Genre[] { Genre.Crime, Genre.Drama },
+                RunningTime = new TimeSpan(2, 55, 0),
+                MinimumAge = 14,
+                Available3D = false
+            });
         }
 
-        private void AddTheather(Action<Theather> builder)
+        private static void SetupSessions(Application instance)
         {
-            var theather = new Theather();
-
-            builder(theather);
-            this.theathers.Add(theather);
+            foreach (var item in instance.Films)
+            {
+                
+            }
         }
     }
 }

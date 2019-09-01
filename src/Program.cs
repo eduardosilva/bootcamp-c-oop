@@ -9,7 +9,7 @@ namespace Exemplo
     {
         static void Main(string[] args)
         {
-            var sample = Sample.CreateSample();
+            var sample = Application.Startup();
             sample.Run();
 
             Console.WriteLine("Execution finished.");

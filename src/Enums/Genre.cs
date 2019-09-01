@@ -30,6 +30,7 @@ namespace Exemplo.Enums
         Crime = 26,
         Teen = 27,
         RomCom = 28,
-        Medical = 29
+        Medical = 29,
+        War = 30
     }
 }
