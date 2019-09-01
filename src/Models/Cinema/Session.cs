@@ -8,6 +8,7 @@ namespace Exemplo.Models.Cinema
 {
     public class Session
     {
+        public Theather Theather { get; }
         public Film Film { get; protected set; }
         public Room Room { get; protected set; }
         public DateTime StartDate { get; protected set; }
@@ -19,8 +20,9 @@ namespace Exemplo.Models.Cinema
 
         public DateTime EndDate => StartDate.Add(this.Film.RunningTime).Add(TrailerTime);
 
-        internal Session(Film film, Room room, DateTime startDate)
+        internal Session(Theather theather, Film film, Room room, DateTime startDate)
         {
+            this.Theather = theather;
             this.Film = film;
             this.Room = room;
             this.StartDate = startDate;

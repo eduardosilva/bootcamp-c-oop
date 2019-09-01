@@ -58,7 +58,7 @@ namespace Exemplo
             });
             instance.AddFilm(new Film
             {
-                Title = "Avengers: Age of Utron",
+                Title = "Avengers: Age of Ultron",
                 ReleaseDate = new DateTime(2015, 4, 23),
                 Genres = new Genre[] { Genre.Action, Genre.Adventure, Genre.SciFi },
                 RunningTime = new TimeSpan(2, 21, 0),

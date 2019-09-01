@@ -18,6 +18,14 @@ namespace Exemplo
         public IEnumerable<Film> Films => films.AsEnumerable();
         public IEnumerable<User> Users => users.AsEnumerable();
 
+        public IEnumerable<SessionsAggregator> ListAllSessions()
+        {
+            return this.Theathers.Select(t => new SessionsAggregator {
+                TheatherName = t.Name,
+                Sessions = t.Sessions
+            });
+        }
+
         private Application() { }
 
         public void AddTheather(Action<Theather> builder)
@@ -33,12 +41,5 @@ namespace Exemplo
             this.films.Add(film);
         }
 
-        public IEnumerable<SessionsAggregator> ListAllSessions()
-        {
-            return this.Theathers.Select(t => new SessionsAggregator {
-                TheatherName = t.Name,
-                Sessions = t.Sessions
-            });
-        }
     }
 }

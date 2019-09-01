@@ -71,7 +71,7 @@ namespace Exemplo.Models.Cinema.Helpers
             var row = new Row() { Letter = this.code };
 
             var seats = this.seatNumbers.Select(n => {
-                var seat = new Seat {
+                var seat = new Seat(row) {
                     Number = n,
                     Type = SeatType.Regular
                 };

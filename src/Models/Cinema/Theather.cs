@@ -26,6 +26,18 @@ namespace Exemplo.Models.Cinema
         public TimeSpan ClosingTime { get; set; }
         public IEnumerable<Room> Rooms => this.rooms.AsEnumerable();
         public IEnumerable<Session> Sessions => this.sessions.AsEnumerable();
+        public IEnumerable<IPriceProvider> PriceProvidersDefault {
+            get {
+                yield return holidayPricingTable;
+                yield return defaultPricingTable;
+            }
+        }
+        public IEnumerable<IPriceProvider> PriceProviders3D {
+            get {
+                yield return holidayPricingTable3D;
+                yield return defaultPricingTable3D;
+            }
+        }
 
         public void AddRoom(Room room, Action<RoomLayoutBuilder> builder)
         {
@@ -126,7 +138,7 @@ namespace Exemplo.Models.Cinema
                 throw new ApplicationException($"Invalid session time for this room. The earliest available date is {minDate}");
             }
 
-            var session = new Session(film, room, startDate);
+            var session = new Session(this, film, room, startDate);
 
             this.sessions.Add(session);
             return session;
