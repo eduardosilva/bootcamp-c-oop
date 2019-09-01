@@ -1,5 +1,7 @@
 
 using System;
+using System.Linq;
+using Exemplo.Enums;
 using Exemplo.Extensions;
 using Exemplo.Models.Booking.Pricing;
 
@@ -10,9 +12,16 @@ namespace Exemplo
         static void Main(string[] args)
         {
             var sample = Application.Startup();
-            sample.Run();
 
-            Console.WriteLine("Execution finished.");
+            var sessions = sample.ListAllSessions().Select(a => a.Sessions.Select(s =>
+                $"{s.Film.Title} - {Enum.GetName(typeof(LocalizationOption), s.Localization)} - "
+                + $"{s.StartDate:dd/MM/yyyy HH:mm:ss} - {a.TheatherName} - Room {s.Room.Number}"
+            )).SelectMany(s => s);
+
+            foreach (var item in sessions)
+            {
+                Console.WriteLine(item);
+            }
         }
         
     }

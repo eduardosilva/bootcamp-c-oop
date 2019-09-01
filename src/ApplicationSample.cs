@@ -15,6 +15,7 @@ namespace Exemplo
 
             SetupTheathers(instance);
             SetupFilms(instance);
+            SetupSessions(instance);
 
             return instance;
         }
@@ -133,6 +134,14 @@ namespace Exemplo
                 Available3D = false
             });
             instance.AddFilm(new Film {
+                Title = "Elite Squad",
+                ReleaseDate = new DateTime(2007, 10, 12),
+                Genres = new Genre[] { Genre.Action, Genre.Crime, Genre.Drama },
+                RunningTime = new TimeSpan(1, 55, 0),
+                MinimumAge = 16,
+                Available3D = false
+            });
+            instance.AddFilm(new Film {
                 Title = "The Matrix",
                 ReleaseDate = new DateTime(1999, 5, 21),
                 Genres = new Genre[] { Genre.Action, Genre.SciFi },
@@ -152,10 +161,24 @@ namespace Exemplo
 
         private static void SetupSessions(Application instance)
         {
+            var theather = instance.Theathers.First();
+            var roomNumber = theather.Rooms.First().Number;
+            var startDate = theather.NextAvaiableSession(roomNumber);
+
             foreach (var item in instance.Films)
             {
-                
+                theather.AddSession(item, roomNumber, startDate);
+                startDate = theather.NextAvaiableSession(roomNumber);
             }
+
+            var sessionsList = theather.Sessions.ToList();
+
+            sessionsList[0].Localization = LocalizationOption.Dubbed;
+            sessionsList[1].Localization = LocalizationOption.Dubbed;
+            sessionsList[2].Localization = LocalizationOption.Subtitled;
+            sessionsList[3].Localization = LocalizationOption.None;
+            sessionsList[4].Localization = LocalizationOption.Subtitled;
+            sessionsList[5].Localization = LocalizationOption.Subtitled;
         }
     }
 }

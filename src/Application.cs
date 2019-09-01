@@ -4,6 +4,7 @@ using System.Linq;
 using Exemplo.Enums;
 using Exemplo.Models.Cinema;
 using Exemplo.Models.Common;
+using Exemplo.Queries;
 
 namespace Exemplo
 {
@@ -11,22 +12,13 @@ namespace Exemplo
     {
         private ICollection<Film> films;
         private ICollection<Theather> theathers;
-        private ICollection<Session> sessions;
-
 
         public IEnumerable<Theather> Theathers => theathers.AsEnumerable();
         public IEnumerable<Film> Films => films.AsEnumerable();
-        public IEnumerable<Session> Sessions => sessions.AsEnumerable();
-
 
         private Application() {
             this.theathers = new List<Theather>();
             this.films = new List<Film>();
-        }
-
-        public void Run()
-        {
-            Console.WriteLine(this.Theathers.First().Rooms.First().Capacity);
         }
 
         public void AddTheather(Action<Theather> builder)
@@ -42,21 +34,12 @@ namespace Exemplo
             this.films.Add(film);
         }
 
-        public void AddSession(Session session)
+        public IEnumerable<SessionsAggregator> ListAllSessions()
         {
-            if (this.Sessions.Any(s => s.Room == session.Room
-                && s.StartDate <= session.EndDate
-                && s.EndDate >= session.StartDate))
-            {
-                throw new ApplicationException("A session is already scheduled for this room in this time.");
-            }
-
-            this.sessions.Add(session);
-        }
-
-        public Film GetFilm(string title)
-        {
-            return this.films.FirstOrDefault(f => f.Title == title);
+            return this.Theathers.Select(t => new SessionsAggregator {
+                TheatherName = t.Name,
+                Sessions = t.Sessions
+            });
         }
     }
 }
