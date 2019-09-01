@@ -10,7 +10,7 @@ namespace Exemplo.Models.Cinema
         public TimeSpan RunningTime { get; set; }
         public IEnumerable<Genre> Genres { get; set; }
         public DateTime ReleaseDate { get; set; }
-        public bool Available3D { get; set; }
+        public Option3D Film3D { get; set; }
         public int MinimumAge { get; set; }
     }
 }

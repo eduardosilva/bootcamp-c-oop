@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Exemplo.Enums;
 using Exemplo.Extensions;
+using Exemplo.Models.Booking.Pricing;
+using Exemplo.Models.Cinema.Helpers;
 using Exemplo.Models.Common;
 
 namespace Exemplo.Models.Cinema
@@ -12,6 +15,10 @@ namespace Exemplo.Models.Cinema
 
         protected ICollection<Room> rooms = new List<Room>();
         protected ICollection<Session> sessions = new List<Session>();
+        protected DatePricingTable holidayPricingTable = new DatePricingTable();
+        protected WeekdayPricingTable defaultPricingTable = new WeekdayPricingTable();
+        protected DatePricingTable holidayPricingTable3D = new DatePricingTable();
+        protected WeekdayPricingTable defaultPricingTable3D = new WeekdayPricingTable();
 
         public string Name { get; set; }
         public Location Address { get; set; }
@@ -23,11 +30,49 @@ namespace Exemplo.Models.Cinema
         public void AddRoom(Room room, Action<RoomLayoutBuilder> builder)
         {
             var layoutBuilder = new RoomLayoutBuilder();
+            
             builder(layoutBuilder);
 
             room.Rows = layoutBuilder.Build();
 
             this.rooms.Add(room);
+        }
+
+        public void HasDatePricingScheme(Action<DatePricingTable> builder, Option3D option3d = Option3D.None) {
+            DatePricingTable table = null;
+
+            switch (option3d)
+            {
+                case Option3D.With3D:
+                    table = holidayPricingTable3D;
+                    break;
+                default:
+                    table = holidayPricingTable;
+                    break;
+            }
+
+            builder(table);
+        }
+
+        public void HasWeekdayPricingScheme(Action<WeekdayPricingTable> builder, Option3D option3d = Option3D.None) {
+            WeekdayPricingTable table = null;
+
+            switch (option3d)
+            {
+                case Option3D.With3D:
+                    table = defaultPricingTable3D;
+                    break;
+                default:
+                    table = defaultPricingTable;
+                    break;
+            }
+
+            builder(table);
+        }
+
+        public void CloneRoom(Room room, int newRoomNumber)
+        {
+            this.rooms.Add(room.Clone(newRoomNumber));
         }
 
         public DateTime NextAvaiableSession(int roomNumber)

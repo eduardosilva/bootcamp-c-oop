@@ -40,6 +40,25 @@ namespace Exemplo.Models.Cinema
                     .Single(s => s.Number == number);
             }
         }
+
+        public Room Clone(int newRoomNumber)
+        {
+            var newRoom = new Room {
+                Number = newRoomNumber,
+                ScreenType = this.ScreenType,
+                Supports3D = this.Supports3D
+            };
+
+            newRoom.Rows = this.Rows.Select(r => new Row {
+                Letter = r.Letter,
+                Seats = r.Seats.Select(s => new Seat {
+                    Number = s.Number,
+                    Type = s.Type
+                }).ToList()
+            }).ToList();
+
+            return newRoom;
+        }
     }
     
 }

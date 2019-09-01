@@ -4,7 +4,7 @@ using System.Linq;
 using Exemplo.Enums;
 
 
-namespace Exemplo.Models.Cinema
+namespace Exemplo.Models.Cinema.Helpers
 {
     public class RoomLayoutBuilder
     {
