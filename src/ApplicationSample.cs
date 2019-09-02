@@ -159,7 +159,7 @@ namespace Exemplo
             {
                 Number = 1,
                 ScreenType = ScreenType.IMAX,
-                Supports3D = true
+                Supports3D = Option3D.With3D
             };
 
             theather.AddRoom(room, (builder) =>

@@ -10,7 +10,7 @@ namespace Exemplo.Models.Cinema
         public int Number { get; set; }
         public ScreenType ScreenType { get; set; }
         public IEnumerable<Row> Rows { get; internal set; }
-        public bool Supports3D { get; set; }
+        public Option3D Supports3D { get; set; }
 
         public IEnumerable<Seat> AllSeats => this.Rows.SelectMany(r => r.Seats);
         public int Capacity => this.AllSeats.Count();

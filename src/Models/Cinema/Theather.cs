@@ -27,8 +27,10 @@ namespace Exemplo.Models.Cinema
         public TimeSpan ClosingTime { get; set; }
         public IEnumerable<Room> Rooms => this.rooms.AsEnumerable();
         public IEnumerable<Session> Sessions => this.sessions.AsEnumerable();
-        public IDictionary<Option3D, IEnumerable<IPriceProvider>> PriceProviders {
-            get {
+        public IDictionary<Option3D, IEnumerable<IPriceProvider>> PriceProviders
+        {
+            get
+            {
                 var dict = new Dictionary<Option3D, IEnumerable<IPriceProvider>>();
 
                 dict.Add(
@@ -50,7 +52,7 @@ namespace Exemplo.Models.Cinema
         public void AddRoom(Room room, Action<RoomLayoutBuilder> builder)
         {
             var layoutBuilder = new RoomLayoutBuilder();
-            
+
             builder(layoutBuilder);
 
             room.Rows = layoutBuilder.Build();
@@ -58,7 +60,8 @@ namespace Exemplo.Models.Cinema
             this.rooms.Add(room);
         }
 
-        public void ConfigureDatePricingScheme(Action<DatePricingTable> builder, Option3D option3d = Option3D.None) {
+        public void ConfigureDatePricingScheme(Action<DatePricingTable> builder, Option3D option3d = Option3D.None)
+        {
             DatePricingTable table = null;
 
             switch (option3d)
@@ -74,7 +77,8 @@ namespace Exemplo.Models.Cinema
             builder(table);
         }
 
-        public void ConfigureWeekdayPricingScheme(Action<WeekdayPricingTable> builder, Option3D option3d = Option3D.None) {
+        public void ConfigureWeekdayPricingScheme(Action<WeekdayPricingTable> builder, Option3D option3d = Option3D.None)
+        {
             WeekdayPricingTable table = null;
 
             switch (option3d)
@@ -104,7 +108,7 @@ namespace Exemplo.Models.Cinema
         {
             DateTime minDate;
             var openingCurrent = DateTime.Today.Add(this.OpeningTime);
-            var closingCurrent = DateTime.Today.Add(this.ClosingTime);            
+            var closingCurrent = DateTime.Today.Add(this.ClosingTime);
 
             var sessionsForRoom = this.Sessions.Where(s => s.Room == room);
 
