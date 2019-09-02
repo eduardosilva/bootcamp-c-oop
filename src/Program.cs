@@ -5,6 +5,7 @@ using Exemplo.Enums;
 using Exemplo.Extensions;
 using Exemplo.Models.Booking.Pricing;
 using Exemplo.Models.Cinema;
+using Newtonsoft.Json;
 
 namespace Exemplo
 {
@@ -46,9 +47,9 @@ namespace Exemplo
                 (session.Room['F', 8], "Maria")
             };           
 
-            application.BookSession(user, session, seats);
-            application.BookSession(user, session, seats);
+            var tickets = application.BookSession(user, session, seats);
 
+            Console.WriteLine(JsonConvert.SerializeObject(tickets));
         }
     }
 }

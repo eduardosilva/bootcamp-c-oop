@@ -9,12 +9,15 @@ namespace Exemplo.Services
     public class BookingService : IBookingService
     {
         private IPricingService pricingService;
+        private IPaymentService paymentService;
 
         public BookingService(
-            IPricingService pricingService
+            IPricingService pricingService,
+            IPaymentService paymentService
         )
         {
             this.pricingService = pricingService;
+            this.paymentService = paymentService;
         }
 
         public IEnumerable<Ticket> Book(User user, Session session, IEnumerable<(Seat, string)> seats)
@@ -54,7 +57,10 @@ namespace Exemplo.Services
 
             var total = price * reservedSeats.Count();
 
-            // call payment service here
+            if (!paymentService.ExecutePayment(user.Document, total).Result)
+            {
+                throw new ApplicationException("Payment refused.");
+            }
 
             var tickets = new List<Ticket>();
 
@@ -62,9 +68,11 @@ namespace Exemplo.Services
             {
                 var ticket = new Ticket {
                     Id = Guid.NewGuid(),
+                    FilmTitle = session.Film.Title,
+                    StartDate = session.StartDate,
+                    Room = $"Room {session.Room.Number}",
                     ReservationName = item.Name,
                     SeatName = item.Reservation.Seat.Name,
-                    Session = session
                 };
 
                 item.Reservation.IsReserved = true;

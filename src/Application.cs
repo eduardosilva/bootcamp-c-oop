@@ -11,10 +11,6 @@ namespace Exemplo
 {
     public partial class Application
     {
-        private IBookingService bookingService;
-        private IPricingService pricingService;
-
-
         private ICollection<Film> films = new List<Film>();
         private ICollection<Theather> theathers = new List<Theather>();
         private ICollection<User> users = new List<User>();
@@ -47,7 +43,8 @@ namespace Exemplo
         public IEnumerable<Ticket> BookSession(User user, Session session, IEnumerable<(Seat, string)> seats)
         {
             var pricingService = new PricingService(session.Theather.PriceProviders);
-            var bookingService = new BookingService(pricingService);
+            var paymentService = new PaymentService();
+            var bookingService = new BookingService(pricingService, paymentService);
 
             return bookingService.Book(user, session, seats);
         }
