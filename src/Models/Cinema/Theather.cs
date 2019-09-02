@@ -58,7 +58,7 @@ namespace Exemplo.Models.Cinema
             this.rooms.Add(room);
         }
 
-        public void HasDatePricingScheme(Action<DatePricingTable> builder, Option3D option3d = Option3D.None) {
+        public void ConfigureDatePricingScheme(Action<DatePricingTable> builder, Option3D option3d = Option3D.None) {
             DatePricingTable table = null;
 
             switch (option3d)
@@ -74,7 +74,7 @@ namespace Exemplo.Models.Cinema
             builder(table);
         }
 
-        public void HasWeekdayPricingScheme(Action<WeekdayPricingTable> builder, Option3D option3d = Option3D.None) {
+        public void ConfigureWeekdayPricingScheme(Action<WeekdayPricingTable> builder, Option3D option3d = Option3D.None) {
             WeekdayPricingTable table = null;
 
             switch (option3d)

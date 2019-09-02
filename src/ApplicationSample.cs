@@ -249,7 +249,7 @@ namespace Exemplo
 
         private static void SetupPricingScheme(Theather theather)
         {
-            theather.HasWeekdayPricingScheme(table => {
+            theather.ConfigureWeekdayPricingScheme(table => {
                 var night = TimeSpan.FromHours(nightTime);
 
                 table.AddPricingRule(
@@ -326,7 +326,7 @@ namespace Exemplo
                 table.AddPricingRule(DayOfWeek.Sunday, 40);
             });
 
-            theather.HasWeekdayPricingScheme(table => {
+            theather.ConfigureWeekdayPricingScheme(table => {
                 var night = TimeSpan.FromHours(nightTime);
 
                 table.AddPricingRule(
@@ -416,7 +416,7 @@ namespace Exemplo
                 );
             }, Option3D.With3D);
 
-            theather.HasDatePricingScheme(table =>
+            theather.ConfigureDatePricingScheme(table =>
             {
                 table.AddPricingRule(new DateTime(2019, 11, 15), 40);
                 table.AddPricingRule(new DateTime(2019, 11, 20), 40);
@@ -424,7 +424,7 @@ namespace Exemplo
                 table.AddPricingRule(new DateTime(2020, 1, 1), 40);
             });
 
-            theather.HasDatePricingScheme(table =>
+            theather.ConfigureDatePricingScheme(table =>
             {
                 var night = TimeSpan.FromHours(nightTime);
 

@@ -15,11 +15,11 @@ namespace Exemplo
         {
             var sample = Application.Startup();
 
-            PrintAllCatalog(sample);
+            PrintAllSchedule(sample);
             BookAFilm(sample);
         }
 
-        static void PrintAllCatalog(Application application)
+        static void PrintAllSchedule(Application application)
         {
             var sessions = application.ListAllSessions().Select(a => a.Sessions.Select(s =>
                $"{s.Film.Title} - {Enum.GetName(typeof(LocalizationOption), s.Localization)} - "

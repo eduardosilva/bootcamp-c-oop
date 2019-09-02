@@ -19,17 +19,7 @@ namespace Exemplo.Models.Cinema
         {
             get
             {
-                var row = seat.Substring(0, 1);
-                var numberString = seat.Substring(1, seat.Length);
-
-                int number;
-
-                if (row.Length != 1 || Int32.TryParse(numberString, out number))
-                {
-                    throw new ApplicationException($"Invalid seat code {seat}");
-                }
-
-                return this[row[0], number];
+               return this.AllSeats.Single(s => s.Name == seat);
             }
         }
 
