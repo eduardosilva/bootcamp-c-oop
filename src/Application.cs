@@ -5,11 +5,16 @@ using Exemplo.Enums;
 using Exemplo.Models.Booking;
 using Exemplo.Models.Cinema;
 using Exemplo.Queries;
+using Exemplo.Services;
 
 namespace Exemplo
 {
     public partial class Application
     {
+        private IBookingService bookingService;
+        private IPricingService pricingService;
+
+
         private ICollection<Film> films = new List<Film>();
         private ICollection<Theather> theathers = new List<Theather>();
         private ICollection<User> users = new List<User>();
@@ -26,8 +31,6 @@ namespace Exemplo
             });
         }
 
-        private Application() { }
-
         public void AddTheather(Action<Theather> builder)
         {
             var theather = new Theather();
@@ -39,6 +42,14 @@ namespace Exemplo
         public void AddFilm(Film film)
         {
             this.films.Add(film);
+        }
+
+        public IEnumerable<Ticket> BookSession(User user, Session session, IEnumerable<(Seat, string)> seats)
+        {
+            var pricingService = new PricingService(session.Theather.PriceProviders);
+            var bookingService = new BookingService(pricingService);
+
+            return bookingService.Book(user, session, seats);
         }
 
     }

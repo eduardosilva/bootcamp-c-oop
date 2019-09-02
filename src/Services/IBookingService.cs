@@ -8,6 +8,6 @@ using Exemplo.Models.Cinema;
 namespace Exemplo.Services
 {
     public interface IBookingService {
-        IEnumerable<Ticket> Book(User user, Session session, IEnumerable<Seat> seats);
+        IEnumerable<Ticket> Book(User user, Session session, IEnumerable<(Seat, string)> seats);
     }
 }

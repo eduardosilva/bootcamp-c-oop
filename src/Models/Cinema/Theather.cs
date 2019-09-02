@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Exemplo.Enums;
 using Exemplo.Extensions;
 using Exemplo.Models.Booking.Pricing;
@@ -26,16 +27,23 @@ namespace Exemplo.Models.Cinema
         public TimeSpan ClosingTime { get; set; }
         public IEnumerable<Room> Rooms => this.rooms.AsEnumerable();
         public IEnumerable<Session> Sessions => this.sessions.AsEnumerable();
-        public IEnumerable<IPriceProvider> PriceProvidersDefault {
+        public IDictionary<Option3D, IEnumerable<IPriceProvider>> PriceProviders {
             get {
-                yield return holidayPricingTable;
-                yield return defaultPricingTable;
-            }
-        }
-        public IEnumerable<IPriceProvider> PriceProviders3D {
-            get {
-                yield return holidayPricingTable3D;
-                yield return defaultPricingTable3D;
+                var dict = new Dictionary<Option3D, IEnumerable<IPriceProvider>>();
+
+                dict.Add(
+                    Option3D.None,
+                    new List<IPriceProvider>() {
+                        holidayPricingTable, defaultPricingTable
+                    });
+
+                dict.Add(
+                    Option3D.With3D,
+                    new List<IPriceProvider>() {
+                        holidayPricingTable3D, defaultPricingTable3D
+                    });
+
+                return dict;
             }
         }
 

@@ -19,29 +19,33 @@ namespace Exemplo.Services
 
         public IEnumerable<Ticket> Book(User user, Session session, IEnumerable<(Seat, string)> seats)
         {
+            if (seats.Select(s => s.Item1).Distinct().Count() != seats.Count())
+            {
+                throw new ApplicationException("One or more seats were selected multiple times.");
+            }
+                        
             var reservedSeats = (
                 from s in seats
                 join r in session.Reservations on s.Item1 equals r.Seat
                 select new { Reservation = r, Name = s.Item2 }
-            );
-                        
+            ).ToList();
 
-            if (reservedSeats.Count() != seats.Count())
+            if (reservedSeats.Count != seats.Count())
             {
                 throw new ApplicationException("One or more selected seats do not belong to this session.");
             }
 
             if (reservedSeats.Any(r => !r.Reservation.IsAvaiable))
             {
-                throw new ApplicationException("One or more selected seats is not available for selection.");
+                throw new ApplicationException("One or more selected seats are not available for selection.");
             }
 
             if (reservedSeats.Any(r => r.Reservation.IsReserved))
             {
-                throw new ApplicationException("One or more selected seats is already reserved.");
+                throw new ApplicationException("One or more selected seats are already reserved.");
             }
 
-            decimal price = pricingService.GetPrice(session.StartDate);
+            decimal price = pricingService.GetPrice(session.StartDate, session.Session3D);
 
             if (session.PricingRatio != null)
             {
