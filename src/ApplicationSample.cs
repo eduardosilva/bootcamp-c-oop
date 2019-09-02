@@ -237,10 +237,6 @@ namespace Exemplo
                 {
                     row.HasSeatRange(1, 17);
                 });
-                builder.HasRow('L', (row) =>
-                {
-                    row.HasSeatRange(1, 22);
-                });
             });
 
             theather.CloneRoom(room, 2);
