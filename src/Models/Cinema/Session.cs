@@ -29,6 +29,11 @@ namespace Exemplo.Models.Cinema
                     throw new ApplicationException("The session room does not support the supplied 3D method.");
                 }
 
+                if (option3D == Option3D.With3D && Film.Film3D == Option3D.None)
+                {
+                    throw new ApplicationException("The selected film does not support the supplied 3D method.");
+                }
+
                 this.option3D = value;
             }
         }
