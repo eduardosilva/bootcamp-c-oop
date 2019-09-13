@@ -10,13 +10,15 @@ namespace Exemplo.Models.Cinema.Helpers
     {
         private ICollection<RowLayoutBuilder> rowBuilders = new List<RowLayoutBuilder>();
 
-        public void HasRow(char code, Action<RowLayoutBuilder> builder)
+        public RowLayoutBuilder HasRow(char code, Action<RowLayoutBuilder> builder)
         {
             var rowBuilder = new RowLayoutBuilder(code);
             
             builder(rowBuilder);
 
             rowBuilders.Add(rowBuilder);
+
+            return rowBuilder;
         }
 
         public IEnumerable<Row> Build()
@@ -35,7 +37,7 @@ namespace Exemplo.Models.Cinema.Helpers
             this.code = code;
         }
 
-        public void HasSeats(IEnumerable<int> numbers)
+        public RowLayoutBuilder HasSeats(IEnumerable<int> numbers)
         {
             if (numbers.Distinct().Count() != numbers.Count())
             {
@@ -43,9 +45,11 @@ namespace Exemplo.Models.Cinema.Helpers
             }
 
             this.seatNumbers = numbers;
+
+            return this;
         }
 
-        public void HasSeats(params int[] args)
+        public RowLayoutBuilder HasSeats(params int[] args)
         {
             if (args.Distinct().Count() != args.Count())
             {
@@ -53,17 +57,21 @@ namespace Exemplo.Models.Cinema.Helpers
             }
 
             this.seatNumbers = args;
+
+            return this;
         }
 
-        public void HasSeatRange(int start, int count)
+        public RowLayoutBuilder HasSeatRange(int start, int count)
         {
             this.seatNumbers = Enumerable.Range(start, count);
+            return this;
         }
 
-        public void WithSeatAt(int number, Action<Seat> seatBuilder)
+        public RowLayoutBuilder WithSeatAt(int number, Action<Seat> seatBuilder)
         {
             seatBuilders.Remove(number);
             seatBuilders.Add(number, seatBuilder);
+            return this;
         }
 
         public Row Build()

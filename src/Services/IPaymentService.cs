@@ -1,11 +1,11 @@
 using System;
 using System.Threading.Tasks;
+using Exemplo.Services.Logger;
 
 namespace Exemplo.Services
 {
-    public interface IPaymentService
+    public interface IPaymentService : ILog
     {
-        Action<string> Logger { get; }
         Task<bool> ExecutePayment(string document, decimal value);
     }
 }

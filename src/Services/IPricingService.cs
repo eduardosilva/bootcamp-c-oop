@@ -3,12 +3,12 @@ using System;
 using System.Collections.Generic;
 using Exemplo.Enums;
 using Exemplo.Models.Booking.Pricing;
+using Exemplo.Services.Logger;
 
 namespace Exemplo.Services
 {
-    public interface IPricingService
+    public interface IPricingService : ILog
     {
-        Action<string> Logger { get; }
         decimal GetPrice(DateTime date, Option3D option3D);
     }
 }
