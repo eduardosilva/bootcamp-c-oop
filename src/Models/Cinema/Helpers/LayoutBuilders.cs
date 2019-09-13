@@ -10,7 +10,7 @@ namespace Exemplo.Models.Cinema.Helpers
     {
         private ICollection<RowLayoutBuilder> rowBuilders = new List<RowLayoutBuilder>();
 
-        public RowLayoutBuilder HasRow(char code, Action<RowLayoutBuilder> builder)
+        public RoomLayoutBuilder HasRow(char code, Action<RowLayoutBuilder> builder)
         {
             var rowBuilder = new RowLayoutBuilder(code);
             
@@ -18,7 +18,7 @@ namespace Exemplo.Models.Cinema.Helpers
 
             rowBuilders.Add(rowBuilder);
 
-            return rowBuilder;
+            return this;
         }
 
         public IEnumerable<Row> Build()

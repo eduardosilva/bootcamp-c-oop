@@ -164,79 +164,80 @@ namespace Exemplo
 
             theather.AddRoom(room, (builder) =>
             {
-                builder.HasRow('A', (row) =>
-                {
-                    row.HasSeatRange(1, 14);
-                });
-                builder.HasRow('B', (row) =>
-                {
-                    row.HasSeatRange(1, 11);
-                    row.WithSeatAt(2, (seat) => seat.Type = SeatType.Companion);
-                    row.WithSeatAt(3, (seat) => seat.Type = SeatType.Handicap);
-                    row.WithSeatAt(4, (seat) => seat.Type = SeatType.Handicap);
-                    row.WithSeatAt(5, (seat) => seat.Type = SeatType.Companion);
-                    row.WithSeatAt(7, (seat) => seat.Type = SeatType.Companion);
-                    row.WithSeatAt(8, (seat) => seat.Type = SeatType.Handicap);
-                    row.WithSeatAt(9, (seat) => seat.Type = SeatType.Handicap);
-                    row.WithSeatAt(10, (seat) => seat.Type = SeatType.Companion);
-                });
-                builder.HasRow('C', (row) =>
-                {
-                    row.HasSeatRange(1, 14);
-                    row.WithSeatAt(1, (seat) => seat.Type = SeatType.ReducedMobility);
-                    row.WithSeatAt(2, (seat) => seat.Type = SeatType.Companion);
-                    row.WithSeatAt(13, (seat) => seat.Type = SeatType.Companion);
-                    row.WithSeatAt(14, (seat) => seat.Type = SeatType.ReducedMobility);
-                });
-                builder.HasRow('D', (row) =>
-                {
-                    row.HasSeatRange(1, 14);
-                    row.WithSeatAt(1, (seat) => seat.Type = SeatType.ReducedMobility);
-                    row.WithSeatAt(2, (seat) => seat.Type = SeatType.Companion);
-                    row.WithSeatAt(13, (seat) => seat.Type = SeatType.Companion);
-                    row.WithSeatAt(14, (seat) => seat.Type = SeatType.ReducedMobility);
-                });
-                builder.HasRow('E', (row) =>
-                {
-                    row.HasSeatRange(1, 14);
-                });
-                builder.HasRow('F', (row) =>
-                {
-                    row.HasSeatRange(1, 17);
-                    row.WithSeatAt(15, (seat) => seat.Type = SeatType.Obese);
-                    row.WithSeatAt(16, (seat) => seat.Type = SeatType.Obese);
-                    row.WithSeatAt(17, (seat) => seat.Type = SeatType.Companion);
-                });
-                builder.HasRow('G', (row) =>
-                {
-                    row.HasSeatRange(1, 17);
-                    row.WithSeatAt(15, (seat) => seat.Type = SeatType.Obese);
-                    row.WithSeatAt(16, (seat) => seat.Type = SeatType.Obese);
-                    row.WithSeatAt(17, (seat) => seat.Type = SeatType.Companion);
-                });
-                builder.HasRow('H', (row) =>
-                {
-                    row.HasSeatRange(1, 17);
-                    row.WithSeatAt(15, (seat) => seat.Type = SeatType.Obese);
-                    row.WithSeatAt(16, (seat) => seat.Type = SeatType.Obese);
-                    row.WithSeatAt(17, (seat) => seat.Type = SeatType.Companion);
-                });
-                builder.HasRow('I', (row) =>
-                {
-                    row.HasSeatRange(1, 17);
-                });
-                builder.HasRow('J', (row) =>
-                {
-                    row.HasSeatRange(1, 17);
-                });
-                builder.HasRow('K', (row) =>
-                {
-                    row.HasSeatRange(1, 17);
-                });
-                builder.HasRow('L', (row) =>
-                {
-                    row.HasSeatRange(1, 17);
-                });
+                builder
+                    .HasRow('A', (row) =>
+                    {
+                        row.HasSeatRange(1, 14);
+                    })
+                    .HasRow('B', (row) =>
+                    {
+                        row.HasSeatRange(1, 11)
+                            .WithSeatAt(2, (seat) => seat.Type = SeatType.Companion)
+                            .WithSeatAt(3, (seat) => seat.Type = SeatType.Handicap)
+                            .WithSeatAt(4, (seat) => seat.Type = SeatType.Handicap)
+                            .WithSeatAt(5, (seat) => seat.Type = SeatType.Companion)
+                            .WithSeatAt(7, (seat) => seat.Type = SeatType.Companion)
+                            .WithSeatAt(8, (seat) => seat.Type = SeatType.Handicap)
+                            .WithSeatAt(9, (seat) => seat.Type = SeatType.Handicap)
+                            .WithSeatAt(10, (seat) => seat.Type = SeatType.Companion);
+                    })
+                    .HasRow('C', (row) =>
+                    {
+                        row.HasSeatRange(1, 14)
+                            .WithSeatAt(1, (seat) => seat.Type = SeatType.ReducedMobility)
+                            .WithSeatAt(2, (seat) => seat.Type = SeatType.Companion)
+                            .WithSeatAt(13, (seat) => seat.Type = SeatType.Companion)
+                            .WithSeatAt(14, (seat) => seat.Type = SeatType.ReducedMobility);
+                    })
+                    .HasRow('D', (row) =>
+                    {
+                        row.HasSeatRange(1, 14)
+                            .WithSeatAt(1, (seat) => seat.Type = SeatType.ReducedMobility)
+                            .WithSeatAt(2, (seat) => seat.Type = SeatType.Companion)
+                            .WithSeatAt(13, (seat) => seat.Type = SeatType.Companion)
+                            .WithSeatAt(14, (seat) => seat.Type = SeatType.ReducedMobility);
+                    })
+                    .HasRow('E', (row) =>
+                    {
+                        row.HasSeatRange(1, 14);
+                    })
+                    .HasRow('F', (row) =>
+                    {
+                        row.HasSeatRange(1, 17)
+                            .WithSeatAt(15, (seat) => seat.Type = SeatType.Obese)
+                            .WithSeatAt(16, (seat) => seat.Type = SeatType.Obese)
+                            .WithSeatAt(17, (seat) => seat.Type = SeatType.Companion);
+                    })
+                    .HasRow('G', (row) =>
+                    {
+                        row.HasSeatRange(1, 17)
+                            .WithSeatAt(15, (seat) => seat.Type = SeatType.Obese)
+                            .WithSeatAt(16, (seat) => seat.Type = SeatType.Obese)
+                            .WithSeatAt(17, (seat) => seat.Type = SeatType.Companion);
+                    })
+                    .HasRow('H', (row) =>
+                    {
+                        row.HasSeatRange(1, 17)
+                            .WithSeatAt(15, (seat) => seat.Type = SeatType.Obese)
+                            .WithSeatAt(16, (seat) => seat.Type = SeatType.Obese)
+                            .WithSeatAt(17, (seat) => seat.Type = SeatType.Companion);
+                    })
+                    .HasRow('I', (row) =>
+                    {
+                        row.HasSeatRange(1, 17);
+                    })
+                    .HasRow('J', (row) =>
+                    {
+                        row.HasSeatRange(1, 17);
+                    })
+                    .HasRow('K', (row) =>
+                    {
+                        row.HasSeatRange(1, 17);
+                    })
+                    .HasRow('L', (row) =>
+                    {
+                        row.HasSeatRange(1, 17);
+                    });
             });
 
             theather.CloneRoom(room, 2);
