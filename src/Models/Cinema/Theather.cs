@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
 using Exemplo.Enums;
@@ -30,7 +29,7 @@ namespace Exemplo.Models.Cinema
         public TimeSpan ClosingTime { get; set; }
         public IEnumerable<Room> Rooms => this.rooms.AsEnumerable();
         public IEnumerable<Session> Sessions => this.sessions.AsEnumerable();
-        public IReadOnlyDictionary<Option3D, IEnumerable<IPriceProvider>> PriceProviders
+        public IDictionary<Option3D, IEnumerable<IPriceProvider>> PriceProviders
         {
             get
             {
@@ -51,7 +50,7 @@ namespace Exemplo.Models.Cinema
                         });
                 }
 
-                return new ReadOnlyDictionary<Option3D, IEnumerable<IPriceProvider>>(priceProviders);
+                return new Dictionary<Option3D, IEnumerable<IPriceProvider>>(priceProviders);
             }
         }
 
