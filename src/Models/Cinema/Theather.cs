@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
 using Exemplo.Enums;
@@ -21,31 +22,36 @@ namespace Exemplo.Models.Cinema
         protected DatePricingTable holidayPricingTable3D = new DatePricingTable();
         protected WeekdayPricingTable defaultPricingTable3D = new WeekdayPricingTable();
 
+        protected IDictionary<Option3D, IEnumerable<IPriceProvider>> priceProviders;
+
         public string Name { get; set; }
         public Location Address { get; set; }
         public TimeSpan OpeningTime { get; set; }
         public TimeSpan ClosingTime { get; set; }
         public IEnumerable<Room> Rooms => this.rooms.AsEnumerable();
         public IEnumerable<Session> Sessions => this.sessions.AsEnumerable();
-        public IDictionary<Option3D, IEnumerable<IPriceProvider>> PriceProviders
+        public IReadOnlyDictionary<Option3D, IEnumerable<IPriceProvider>> PriceProviders
         {
             get
             {
-                var dict = new Dictionary<Option3D, IEnumerable<IPriceProvider>>();
+                if (priceProviders == null)
+                {
+                    priceProviders = new Dictionary<Option3D, IEnumerable<IPriceProvider>>();
 
-                dict.Add(
-                    Option3D.None,
-                    new List<IPriceProvider>() {
-                        holidayPricingTable, defaultPricingTable
-                    });
+                    priceProviders.Add(
+                        Option3D.None,
+                        new List<IPriceProvider>() {
+                            holidayPricingTable, defaultPricingTable
+                        });
 
-                dict.Add(
-                    Option3D.With3D,
-                    new List<IPriceProvider>() {
-                        holidayPricingTable3D, defaultPricingTable3D
-                    });
+                    priceProviders.Add(
+                        Option3D.With3D,
+                        new List<IPriceProvider>() {
+                            holidayPricingTable3D, defaultPricingTable3D
+                        });
+                }
 
-                return dict;
+                return new ReadOnlyDictionary<Option3D, IEnumerable<IPriceProvider>>(priceProviders);
             }
         }
 
