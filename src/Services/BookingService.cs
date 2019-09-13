@@ -11,6 +11,8 @@ namespace Exemplo.Services
         private IPricingService pricingService;
         private IPaymentService paymentService;
 
+        public Action<string> Logger { get; set; }
+
         public BookingService(
             IPricingService pricingService,
             IPaymentService paymentService

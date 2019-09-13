@@ -46,6 +46,12 @@ namespace Exemplo
             var paymentService = new PaymentService();
             var bookingService = new BookingService(pricingService, paymentService);
 
+            var log = new Action<string>((message) => Console.WriteLine(message));
+
+            pricingService.Logger = log;
+            paymentService.Logger = log;
+            bookingService.Logger = log;
+
             return bookingService.Book(user, session, seats);
         }
 

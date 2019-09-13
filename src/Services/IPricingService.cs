@@ -8,6 +8,7 @@ namespace Exemplo.Services
 {
     public interface IPricingService
     {
+        Action<string> Logger { get; }
         decimal GetPrice(DateTime date, Option3D option3D);
     }
 }

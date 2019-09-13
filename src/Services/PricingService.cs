@@ -11,6 +11,8 @@ namespace Exemplo.Services
     {
         private IDictionary<Option3D, IEnumerable<IPriceProvider>> pricingPriorityList;
 
+        public Action<string> Logger { get; set; }
+
         public PricingService(
             IDictionary<Option3D, IEnumerable<IPriceProvider>> pricingPriorityList
         )
