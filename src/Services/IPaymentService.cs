@@ -1,10 +1,11 @@
+using System;
 using System.Threading.Tasks;
-using Exemplo.Models;
+using Exemplo.Services.Logger;
 
 namespace Exemplo.Services
 {
-    public interface IPaymentService
+    public interface IPaymentService : ILog
     {
-        Task<bool> ExecuteTransaction(string user, Cart cart);
+        Task<bool> ExecutePayment(string document, decimal value);
     }
 }

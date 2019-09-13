@@ -1,64 +1,55 @@
-﻿using System;
-using Exemplo.Models;
-using Exemplo.Models.Products;
-using Exemplo.Models.Products.Enums;
-using Exemplo.Services;
+
+using System;
+using System.Linq;
+using Exemplo.Enums;
+using Exemplo.Extensions;
+using Exemplo.Models.Booking.Pricing;
+using Exemplo.Models.Cinema;
+using Newtonsoft.Json;
 
 namespace Exemplo
 {
     class Program
     {
-        static Clothing CamisaVermelha = new Clothing {
-            Id = 332,
-            SKU = "00SNKES-7723",
-            Stock = 42,
-            Name = "Camisa Polo Vermelha",
-            Brand = "Lacoste",
-            Details = "Camisa polo vermelha lisa Lacoste",
-            Size = "M",
-            AgeGroup = AgeGroup.Adult,
-            Colors = new Color[] {Color.Red},
-            Materials = new Material[] {Material.Cotton, Material.Polyester},
-            UnitPrice = 219.99M,
-            Volume = new VolumeCM {
-                Height = 70,
-                Width = 54,
-                Depth = 0.1
-            },
-            WeightKG = 0.15
-        };
-
-        static Furniture MesaJantar = new Furniture {
-            Id = 1198,
-            SKU = "pdnMRgdlhG9RJq53MS9T",
-            Stock = 9,
-            Name = "Mesa 160x80",
-            Brand = "Tok&Stok",
-            Details = "Mesa de MDF de eucalipto com tampo branco",
-            Colors = new Color[] {Color.White},
-            Materials = new Material[] {Material.FibreBoard},
-            UnitPrice = 759.99M,
-            Volume = new VolumeCM {
-                Height = 76.5,
-                Width = 160,
-                Depth = 80
-            },
-            WeightKG = 32
-        };
-
-        static CreditPaymentService CreditPaymentService;
-        
         static void Main(string[] args)
         {
-            var compra = new Purchase("edu");
-            
-            compra.Cart.AddItem(CamisaVermelha, 3);
-            compra.Cart.AddItem(MesaJantar);
+            var sample = Application.Startup();
 
-            var status = compra.CompletePurchase(PaymentMethod.Credit).Result;
+            PrintAllSchedule(sample);
+            BookAFilm(sample);
+        }
 
-            Console.WriteLine(status);
-            Console.WriteLine(compra.Cart.GetTotalValue());
+        static void PrintAllSchedule(Application application)
+        {
+            var sessions = application.ListAllSessions().Select(a => a.Sessions.Select(s =>
+               $"{s.Film.Title} - {Enum.GetName(typeof(LocalizationOption), s.Localization)} - "
+               + $"{s.StartDate:dd/MM/yyyy HH:mm:ss} - {a.TheatherName} - Room {s.Room.Number}"
+               + $"{(s.Session3D == Option3D.With3D ? " [3D]" : "")}"
+           )).SelectMany(s => s);
+
+            foreach (var item in sessions)
+            {
+                Console.WriteLine(item);
+            }
+        }
+
+        static void BookAFilm(Application application)
+        {
+            var user = application.Users.First();
+
+            var session = application.ListAllSessions()
+                .Where(s => s.TheatherName == "Cinema Pátio Paulista")
+                .SelectMany(s => s.Sessions)
+                .First(s => s.Film.Title == "Lion King");
+
+            var seats = new (Seat, string)[] {
+                (session.Room['F', 7], "João"),
+                (session.Room['F', 8], "Maria")
+            };           
+
+            var tickets = application.BookSession(user, session, seats);
+
+            Console.WriteLine(JsonConvert.SerializeObject(tickets));
         }
     }
 }
